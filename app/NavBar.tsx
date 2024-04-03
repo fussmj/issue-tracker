@@ -1,5 +1,6 @@
 "use client";
 
+import { Skeleton } from "@/app/components";
 import React from "react";
 import Link from "next/link";
 import { AiFillBug } from "react-icons/ai";
@@ -37,6 +38,16 @@ const NavBar = () => {
 
 const AuthStatus = () => {
   const { status, data: session } = useSession();
+
+  if (status === "loading") return <Skeleton width="3rem" />;
+
+  if (status === "unauthenticated")
+    return (
+      <Link href="/api/auth/signin" className="nav-link">
+        Log In
+      </Link>
+    );
+
   return (
     <Box>
       {status === "authenticated" && (
@@ -60,11 +71,6 @@ const AuthStatus = () => {
           </DropdownMenu.Content>
         </DropdownMenu.Root>
         //
-      )}
-      {status === "unauthenticated" && (
-        <Link href="/api/auth/signin" className="nav-link">
-          Log In
-        </Link>
       )}
     </Box>
   );
