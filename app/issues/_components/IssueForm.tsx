@@ -74,7 +74,7 @@ const IssueForm = ({ issue }: Props) => {
           control={control}
           defaultValue={issue?.description}
           render={({ field }) => (
-            <SimpleMDE placeholder="Description" {...field} />
+            <SimpleMDE placeholder="Description" {...field} ref={null} />
           )}
         />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
