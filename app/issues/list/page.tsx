@@ -1,10 +1,10 @@
 import { Table } from "@radix-ui/themes";
-import Link from "../components/Link";
+import Link from "../../components/Link";
 import React from "react";
 import prisma from "@/prisma/client";
-import IssueStatusBadge from "../components/IssueStatusBadge";
+import IssueStatusBadge from "../../components/IssueStatusBadge";
 import delay from "delay";
-import IssueActions from "./IssueActions";
+import IssueActions from "../IssueActions";
 
 export const dynamic = "force-dynamic";
 
