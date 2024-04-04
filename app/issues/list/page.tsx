@@ -4,11 +4,29 @@ import React from "react";
 import prisma from "@/prisma/client";
 import IssueStatusBadge from "../../components/IssueStatusBadge";
 import IssueActions from "./IssueActions";
+import { Status } from "@prisma/client";
 
 export const dynamic = "force-dynamic";
 
-export default async function IssuesPage() {
-  const issues = await prisma.issue.findMany();
+interface Props {
+  searchParams: { status: Status };
+}
+
+export default async function IssuesPage({
+  searchParams,
+}: {
+  searchParams: { status: Status };
+}) {
+  //validate search params prior to passing into prisma
+  const statuses = Object.values(Status);
+  const status = statuses.includes(searchParams.status)
+    ? searchParams.status
+    : undefined;
+
+  //fetch filtered issues
+  const issues = await prisma.issue.findMany({
+    where: { status: status },
+  });
   return (
     <div>
       <IssueActions />
