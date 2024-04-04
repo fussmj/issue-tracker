@@ -23,19 +23,21 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
   if (isLoading) return <Skeleton />;
   if (error) return null;
 
+  async function assignIssue(userId: string) {
+    try {
+      await axios.patch(`/api/issues/${issue.id}`, {
+        assignedToUserId: userId !== "unassign" ? userId : null,
+      });
+    } catch (error) {
+      toast.error("Changes could not be saved");
+    }
+  }
+
   return (
     <>
       <Select.Root
         defaultValue={issue.assignedToUserId || "unassign"}
-        onValueChange={async (userId) => {
-          try {
-            await axios.patch(`/api/issues/${issue.id}`, {
-              assignedToUserId: userId !== "unassign" ? userId : null,
-            });
-          } catch (error) {
-            toast.error("Changes could not be saved");
-          }
-        }}
+        onValueChange={assignIssue}
       >
         <Select.Trigger placeholder="Assign..." />
         <Select.Content>
