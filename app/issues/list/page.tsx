@@ -32,9 +32,14 @@ export default async function IssuesPage({
     ? searchParams.status
     : undefined;
 
+  const orderBy = columns.map((col) => col.value).includes(searchParams.orderBy)
+    ? { [searchParams.orderBy]: "asc" }
+    : undefined;
+
   //fetch filtered issues
   const issues = await prisma.issue.findMany({
     where: { status: status },
+    orderBy: orderBy,
   });
   return (
     <div>
