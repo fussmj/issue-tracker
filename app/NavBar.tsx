@@ -18,7 +18,6 @@ import {
 
 const NavBar = () => {
   const { status, data: session } = useSession();
-
   return (
     <nav className="border-b mb-5 px-5 py-3">
       <Container>
@@ -50,28 +49,25 @@ const AuthStatus = () => {
 
   return (
     <Box>
-      {status === "authenticated" && (
-        <DropdownMenu.Root>
-          <DropdownMenu.Trigger>
-            <Avatar
-              fallback="?"
-              size="2"
-              radius="full"
-              src={session.user!.image!}
-              className="cursor-pointer"
-            />
-          </DropdownMenu.Trigger>
-          <DropdownMenu.Content>
-            <DropdownMenu.Label>
-              <Text size="2">{session.user!.email}</Text>
-            </DropdownMenu.Label>
-            <DropdownMenu.Item>
-              <Link href="/api/auth/signout">Log Out</Link>
-            </DropdownMenu.Item>
-          </DropdownMenu.Content>
-        </DropdownMenu.Root>
-        //
-      )}
+      <DropdownMenu.Root>
+        <DropdownMenu.Trigger>
+          <Avatar
+            fallback="?"
+            size="2"
+            radius="full"
+            src={session!.user!.image!}
+            className="cursor-pointer"
+          />
+        </DropdownMenu.Trigger>
+        <DropdownMenu.Content>
+          <DropdownMenu.Label>
+            <Text size="2">{session!.user!.email}</Text>
+          </DropdownMenu.Label>
+          <DropdownMenu.Item>
+            <Link href="/api/auth/signout">Log Out</Link>
+          </DropdownMenu.Item>
+        </DropdownMenu.Content>
+      </DropdownMenu.Root>
     </Box>
   );
 };
