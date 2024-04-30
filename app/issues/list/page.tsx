@@ -1,13 +1,9 @@
-import { Table } from "@radix-ui/themes";
-import Link from "../../components/Link";
 import React from "react";
 import prisma from "@/prisma/client";
-import IssueStatusBadge from "../../components/IssueStatusBadge";
 import IssueActions from "./IssueActions";
 import { Issue, Status } from "@prisma/client";
-import NextLink from "next/link";
-import { ArrowUpIcon } from "@radix-ui/react-icons";
 import Pagination from "@/app/components/Pagination";
+import IssueTable from "./IssueTable";
 
 export const dynamic = "force-dynamic";
 
@@ -49,46 +45,11 @@ export default async function IssuesPage({ searchParams }: Props) {
   return (
     <div>
       <IssueActions />
-      <Table.Root variant="surface">
-        <Table.Header>
-          <Table.Row>
-            {columns.map((col: any, index: number) => (
-              <Table.ColumnHeaderCell key={index} className={col.className}>
-                <NextLink
-                  href={{
-                    query: { ...searchParams, orderBy: col.value },
-                  }}
-                >
-                  {col.label}
-                </NextLink>
-                {col.value === searchParams.orderBy && (
-                  <ArrowUpIcon className="inline" />
-                )}
-              </Table.ColumnHeaderCell>
-            ))}
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          {issues.map((issue) => (
-            <Table.Row key={issue.id}>
-              <Table.Cell>
-                <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
-
-                <div className="block md:hidden">
-                  <IssueStatusBadge status={issue.status} />
-                </div>
-              </Table.Cell>
-
-              <Table.Cell className="hidden md:table-cell">
-                <IssueStatusBadge status={issue.status} />
-              </Table.Cell>
-              <Table.Cell className="hidden md:table-cell">
-                {issue.createdAt.toDateString()}
-              </Table.Cell>
-            </Table.Row>
-          ))}
-        </Table.Body>
-      </Table.Root>
+      <IssueTable
+        issues={issues}
+        columns={columns}
+        searchParams={searchParams}
+      />
       <Pagination
         itemCount={issueCount}
         itemsPerPage={pageSize}
