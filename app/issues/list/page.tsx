@@ -4,6 +4,7 @@ import IssueActions from "./IssueActions";
 import { Issue, Status } from "@prisma/client";
 import Pagination from "@/app/components/Pagination";
 import IssueTable from "./IssueTable";
+import { Flex } from "@radix-ui/themes";
 
 export const dynamic = "force-dynamic";
 
@@ -43,7 +44,7 @@ export default async function IssuesPage({ searchParams }: Props) {
   const issueCount = await prisma.issue.count({ where: { status } });
 
   return (
-    <div>
+    <Flex direction="column" gap="3">
       <IssueActions />
       <IssueTable
         issues={issues}
@@ -55,6 +56,6 @@ export default async function IssuesPage({ searchParams }: Props) {
         itemsPerPage={pageSize}
         currentPage={page}
       />
-    </div>
+    </Flex>
   );
 }
