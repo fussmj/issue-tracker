@@ -14,11 +14,7 @@ interface Props {
   searchParams: { status: Status; orderBy: keyof Issue };
 }
 
-export default async function IssuesPage({
-  searchParams,
-}: {
-  searchParams: { status: Status; orderBy: keyof Issue };
-}) {
+export default async function IssuesPage({ searchParams }: Props) {
   //create list for column headers for sorting
   const columns: { label: string; value: keyof Issue; className?: string }[] = [
     { label: "Issue", value: "title" },
