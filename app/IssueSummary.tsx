@@ -1,5 +1,7 @@
+"use client";
+
 import { Status } from "@prisma/client";
-import { Card, Flex, Text } from "@radix-ui/themes";
+import { Button, Card, Flex, Text } from "@radix-ui/themes";
 import Link from "next/link";
 import React from "react";
 
@@ -44,6 +46,7 @@ const IssueSummary = ({ open, inProgress, closed }: Props) => {
           </Flex>
         </Card>
       ))}
+      <Button onClick={() => console.log(open)}>click me</Button>
     </Flex>
   );
 };
