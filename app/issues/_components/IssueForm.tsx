@@ -44,7 +44,7 @@ const IssueForm = ({ issue }: Props) => {
       } else {
         await axios.post("/api/issues", data);
       }
-      router.push("/issues");
+      router.push("/issues/list");
       router.refresh();
     } catch (error) {
       setIsSubmitting(false);
@@ -78,7 +78,7 @@ const IssueForm = ({ issue }: Props) => {
           )}
         />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
-        <Button disabled={isSubmitting} type="submit">
+        <Button disabled={isSubmitting} type="submit" color="blue">
           {issue ? "Update Issue" : "Submit New Issue"}{" "}
           {isSubmitting && <Spinner />}
         </Button>
