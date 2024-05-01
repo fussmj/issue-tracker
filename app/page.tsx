@@ -3,6 +3,12 @@ import LatestIssues from "./api/LatestIssues";
 import IssueChart from "./IssueChart";
 import IssueSummary from "./IssueSummary";
 import prisma from "@/prisma/client";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Issue Tracker - Dashboard",
+  description: "View a summary of issues",
+};
 
 export default async function Home({
   searchParams,

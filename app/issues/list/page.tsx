@@ -5,6 +5,12 @@ import { Issue, Status } from "@prisma/client";
 import Pagination from "@/app/components/Pagination";
 import IssueTable from "./IssueTable";
 import { Flex } from "@radix-ui/themes";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Issue Tracker - Issues",
+  description: "View a list of issues",
+};
 
 export const dynamic = "force-dynamic";
 
