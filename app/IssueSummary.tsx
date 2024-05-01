@@ -46,7 +46,6 @@ const IssueSummary = ({ open, inProgress, closed }: Props) => {
           </Flex>
         </Card>
       ))}
-      <Button onClick={() => console.log(open)}>click me</Button>
     </Flex>
   );
 };
